@@ -50,14 +50,17 @@ export function editNote(req, res) {
 }
 
 export function deleteNote(req, res) {
-  const noteId = req.body.id;
+  const { noteId, laneId } = req.body;
 
-  if (!noteId) {
+  if (!noteId || !laneId) {
     res.status(400).end();
   }
 
-  Note.findOne({ id: noteId })
-      .then(note => {
-        note.remove();
-      });
+  Lane.findOne({ id: laneId })
+    .then(lane => {
+      lane.notes.findOne({ id: noteId })
+        .then(note => {
+          note.remove();
+        });
+    });
 }
