@@ -34,3 +34,30 @@ export function addNote(req, res) {
       });
   });
 }
+
+export function editNote(req, res) {
+  const noteId = req.body.id;
+  const newTask = req.body.task;
+
+  if (!noteId) {
+    res.status(400).end();
+  }
+
+  Note.findOne({ id: noteId })
+      .then(note => {
+        note.task = newTask;
+      });
+}
+
+export function deleteNote(req, res) {
+  const noteId = req.body.id;
+
+  if (!noteId) {
+    res.status(400).end();
+  }
+
+  Note.findOne({ id: noteId })
+      .then(note => {
+        note.remove();
+      });
+}

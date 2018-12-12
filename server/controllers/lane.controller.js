@@ -33,6 +33,20 @@ export function getLanes(req, res) {
   });
 }
 
+export function editLaneTitle(req, res) {
+  const laneId = req.body.id;
+  const newName = req.body.name;
+
+  if (!laneId) {
+    res.status(400).end();
+  }
+
+  Lane.findOne({ id: laneId })
+      .then(lane => {
+        lane.name = newName;
+      });
+}
+
 export function deleteLane(req, res) {
   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
     if (err) {
