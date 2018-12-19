@@ -42,8 +42,13 @@ export function editLaneTitle(req, res) {
   }
 
   Lane.findOne({ id: laneId })
-      .then(lane => {
+      .then((err, lane) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+
         lane.name = newName;
+        res.json(saved);
       });
 }
 
