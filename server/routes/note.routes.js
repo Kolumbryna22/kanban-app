@@ -6,7 +6,7 @@ const router = new Router();
 // Add a new Note
 router.route('/notes').post(NoteController.addNote);
 // Edit Note task
-router.route('/notes').put(NoteController.editNote);
+router.route('/notes/:noteId').put(NoteController.editNote);
 // Delete a Lane by laneId
 router.route('/notes/:noteId').delete(NoteController.deleteNote);
 

@@ -20,7 +20,7 @@ const Kanban = (props) => (
   </div>
 );
 
-//Kanban.need = [() => { return fetchLanes(); }];
+Kanban.need = [() => { return fetchLanes(); }];
 
 Kanban.propTypes = {
   lanes: PropTypes.array,
@@ -28,7 +28,7 @@ Kanban.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  lanes: state.lanes,
+  lanes: Object.values(state.lanes),
 });
 
 const mapDispatchToProps = {
